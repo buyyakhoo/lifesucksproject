@@ -154,4 +154,4 @@ async def help(ctx):
     
     await channel.send(embed=embed)
 
-client.run('NTYyNTQzNzU3MjQ1OTM5NzMy.XpVpXQ.arPQhwcLQFGMj3tIeePbpbW9zro')
+client.run(INSERT YOUR TOKEN)
