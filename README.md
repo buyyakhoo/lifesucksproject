@@ -1,5 +1,5 @@
 # lifesucksproject
-Life Sucks Project (LSP) is a project that I've created for help the absolute life. In my intention, this bot is open sourcem and you can modify this source code, but at least give me a credit this bot is come from and edit by you. 
+Life Sucks Project (LSP) is a project that I've created for help the absolute life. In my intention, this bot is open source and you can modify this source code, but at least give me a credit this bot is come from and edit by you. 
 
 Functions:
 1) .ping - to check ping (ms)
