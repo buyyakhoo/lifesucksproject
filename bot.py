@@ -52,7 +52,7 @@ async def mine(ctx):
         )
         embed.add_field(name="User", value=author, inline=False)
         embed.add_field(name="Coin", value=coin, inline=False)
-        embed.add_field(name="Total", value=f"{data_user[author]} LSC", inline=False)
+        embed.add_field(name="Total", value=f"{data_user[author] :.2f} LSC", inline=False)
         embed.set_footer(text="Life Sucks inc.")
 
         await channel.send(embed=embed)
@@ -68,30 +68,57 @@ async def mine(ctx):
         )
         embed.add_field(name="User", value=author, inline=False)
         embed.add_field(name="Coin", value=coin, inline=False)
-        embed.add_field(name="Total", value=f"{data_user[author]} LSC", inline=False)
+        embed.add_field(name="Total", value=f"{data_user[author] :.2f} LSC", inline=False)
         embed.set_footer(text="Life Sucks inc.")
 
         await channel.send(embed=embed)
 
+#gacha
+@client.command(pass_context=True)
+async def gacha(ctx, paid):
+    try:
+        channel = ctx.message.channel
+        author = ctx.message.author
+        paid = float(paid)
 
-    '''
-    global ltc
-    channel = ctx.message.channel
-    print(ctx.message.author)
-    num = random.randint(1,999)
-    ltc += num
+        if paid <= data_user[author]: 
+            data_user[author] -= paid
+            profit = random.uniform(0, 2)
+            income = paid * profit
+            data_user[author] += income
+            embed = discord.Embed(
+                title="Life Sucks GACHA", 
+                description="Gacha the absolutely life.", 
+                color=0xff8880
+            )
+            embed.add_field(name="User", value=author, inline=False)
+            embed.add_field(name="Paid", value=f"{paid :.2f}", inline=False)
+            embed.add_field(name="Income", value=f"{income :.2f}", inline=False)
+            embed.add_field(name="Profit %", value=f"{(profit-1) * 100 :.2f} %", inline=False)
+            embed.add_field(name="Profit Coin", value=f"{income - paid :.2f} LSC", inline=False)
+            embed.add_field(name="Total", value=f"{data_user[author] :.2f} LSC", inline=False)
+            embed.set_footer(text="Life Sucks inc.")
 
-    embed = discord.Embed(
-        title="Life Sucks Coin Miner", 
-        description="Mine the absolutely life.", 
-        color=0xff8880
-    )
-    embed.add_field(name="Coin", value=num, inline=False)
-    embed.add_field(name="Total", value=f"{ltc} LSC", inline=False)
-    embed.set_footer(text="Life Sucks inc.")
+            await channel.send(embed=embed)
+        else:
+            await channel.send("You don't have enough money. Please, try again later.") 
+            embed = discord.Embed(
+                title="Life Sucks GACHA", 
+                description="Gacha the absolutely life.", 
+                color=0xff8880
+            )
+            embed.add_field(name="User", value=author, inline=False)
+            embed.add_field(name="Lack", value=f"{paid - data_user[author] :.2f}", inline=False)
+            embed.add_field(name="Total", value=f"{data_user[author] :.2f} LSC", inline=False)
+            embed.set_footer(text="Life Sucks inc.")
 
-    await channel.send(embed=embed)
-'''
+            await channel.send(embed=embed)
+    except:
+        channel = ctx.message.channel
+        await channel.send("Money should be number only.") 
+
+
+    
 
 #translator
 @client.command(pass_context=True)
@@ -126,17 +153,18 @@ async def tr(ctx, lang, sentence):
         channel = ctx.message.channel
         await channel.send("this is an error, and I will show you language code for correct translation.")   
         
-        for language_i in language_all:
-            embed = discord.Embed(
-                title="Translate Code", 
-                description=".translate \" \" -code-", 
-                color=0xff90fd
-            )
-        
-            for i in language_i:
-                embed.add_field(name=i, value=language_i[i], inline=True)
-            embed.set_footer(text="Life Sucks inc.")
-            await channel.send(embed=embed)
+        if lang == "help":
+            for language_i in language_all:
+                embed = discord.Embed(
+                    title="Translate Code", 
+                    description=".translate \" \" -code-", 
+                    color=0xff90fd
+                )
+            
+                for i in language_i:
+                    embed.add_field(name=i, value=language_i[i], inline=True)
+                embed.set_footer(text="Life Sucks inc.")
+                await channel.send(embed=embed)
 
 
 #timer
@@ -172,6 +200,7 @@ async def timer(ctx, timee):
 async def todo(ctx, todo):
 '''
 
+
 #help command
 @client.command(pass_context=True)
 async def help(ctx):
@@ -186,11 +215,11 @@ async def help(ctx):
     embed.set_image(url="https://cdn.discordapp.com/attachments/702199048115060876/751831552975175710/mei-misaki-another-another-anime-character-wallpaper-preview.jpg")
     embed.add_field(name=".ping", value="show the latency.", inline=False)
     embed.add_field(name=".mine", value="earn LTC to use absolutely nothing", inline=False)
+    embed.add_field(name=".gacha [amount of coins you paid]", value="gacha the absolute life.", inline=False)
     embed.add_field(name=".date", value="show the date.", inline=False)
-    embed.add_field(name=".tr \"sentence\" [language]", value="translate the absolute life.", inline=False)
+    embed.add_field(name=".tr \"sentence (help) \" [language]", value="translate the absolute life.", inline=False)
     embed.add_field(name=".timer [min]", value="timer the absolute life.", inline=False)
     embed.set_footer(text="Life Sucks inc.")
     await channel.send(embed=embed)
-
 
 client.run('INSERT YOUR TOKEN')
