@@ -73,9 +73,9 @@ async def mine(ctx):
 
         await channel.send(embed=embed)
 
-#gacha
+#gambling
 @client.command(pass_context=True)
-async def gacha(ctx, paid):
+async def bet(ctx, paid):
     try:
         channel = ctx.message.channel
         author = ctx.message.author
@@ -87,12 +87,12 @@ async def gacha(ctx, paid):
             income = paid * profit
             data_user[author] += income
             embed = discord.Embed(
-                title="Life Sucks GACHA", 
-                description="Gacha the absolutely life.", 
+                title="Life Sucks GAMBLING", 
+                description="Bet the absolutely life.", 
                 color=0xff8880
             )
             embed.add_field(name="User", value=author, inline=False)
-            embed.add_field(name="Paid", value=f"{paid :.2f}", inline=False)
+            embed.add_field(name="Bet", value=f"{paid :.2f}", inline=False)
             embed.add_field(name="Income", value=f"{income :.2f}", inline=False)
             embed.add_field(name="Profit %", value=f"{(profit-1) * 100 :.2f} %", inline=False)
             embed.add_field(name="Profit Coin", value=f"{income - paid :.2f} LSC", inline=False)
@@ -103,8 +103,8 @@ async def gacha(ctx, paid):
         else:
             await channel.send("You don't have enough money. Please, try again later.") 
             embed = discord.Embed(
-                title="Life Sucks GACHA", 
-                description="Gacha the absolutely life.", 
+                title="Life Sucks GAMBLING", 
+                description="Bet the absolutely life.", 
                 color=0xff8880
             )
             embed.add_field(name="User", value=author, inline=False)
@@ -115,10 +115,7 @@ async def gacha(ctx, paid):
             await channel.send(embed=embed)
     except:
         channel = ctx.message.channel
-        await channel.send("Money should be number only.") 
-
-
-    
+        await channel.send("Money should be number only.")    
 
 #translator
 @client.command(pass_context=True)
