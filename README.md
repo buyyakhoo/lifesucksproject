@@ -4,7 +4,7 @@ Life Sucks Project (LSP) is a project that I've created for help the absolute li
 Functions:
 1) .ping - to check ping (ms)
 2) .mine - to mine LSC (Life Sucks Coin) to use absolutely nothing
-3) .gacha - gacha the absolute life.
+3) .bet - bet the absolute life.
 3) .date - check the date of today.
 4) .tr [language that want to translate] ["sentence from source language"] - translate the absolute life.
 5) .timer [min]" - timer the absolute life.
